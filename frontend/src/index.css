@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: #f9fafb;
+    color: #111827;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-xl;
+  }
+
+  .glass-dark {
+    @apply bg-gray-900/40 backdrop-blur-lg border border-white/5 shadow-2xl;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-accent-500;
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 text-white font-semibold px-6 py-3 rounded-2xl transition-all duration-300 shadow-lg shadow-primary-500/20 hover:shadow-primary-500/40 active:scale-95 inline-flex items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply bg-white/50 backdrop-blur-sm border border-gray-200 hover:border-primary-400 text-gray-700 hover:text-primary-600 font-semibold px-6 py-3 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md inline-flex items-center gap-2;
+  }
+
+  .btn-danger {
+    @apply bg-gradient-to-r from-red-500 to-red-400 hover:from-red-600 hover:to-red-500 text-white font-semibold px-4 py-2 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg active:scale-95;
+  }
+
+  .card {
+    @apply bg-white rounded-3xl shadow-card p-6 transition-all duration-500 border border-gray-50/50;
+  }
+
+  .card-premium {
+    @apply bg-white rounded-3xl shadow-2xl p-8 border border-gray-100/50 hover:shadow-primary-500/10 transition-all duration-500;
+  }
+
+  .input {
+    @apply w-full border border-gray-100 rounded-2xl px-5 py-3.5 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-primary-500/10 focus:border-primary-400 transition-all duration-300 bg-gray-50/50;
+  }
+
+  .label {
+    @apply block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-black text-gray-900 tracking-tight;
+  }
+}
+
+/* Animations */
+.hover-lift {
+  @apply transition-transform duration-300 hover:-translate-y-2;
+}
+
+.shadow-premium {
+  box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.08);
+}
