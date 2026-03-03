@@ -3,7 +3,8 @@ import { io } from 'socket.io-client';
 import toast from 'react-hot-toast';
 import { FiPackage, FiStar } from 'react-icons/fi';
 
-const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || 'https://fruit-shop-orpin.vercel.app';
+const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || '/';
+
 
 
 export function useAdminSocket() {
