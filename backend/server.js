@@ -18,7 +18,9 @@ import { errorHandler, notFound } from './middleware/errorMiddleware.js';
 await connectDB();
 
 const app = express();
+app.set('trust proxy', 1);
 const server = http.createServer(app);
+
 
 // Root route for Vercel/Health checks
 app.get('/', (req, res) => {

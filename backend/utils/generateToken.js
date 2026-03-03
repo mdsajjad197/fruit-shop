@@ -5,11 +5,11 @@ const generateToken = (res, userId) => {
         expiresIn: '7d',
     });
 
-    const isProduction = process.env.NODE_ENV === 'production';
+    const isProduction = process.env.NODE_ENV === 'production' || process.env.VERCEL;
 
     res.cookie('token', token, {
         httpOnly: true,
-        secure: isProduction,
+        secure: !!isProduction,
         sameSite: isProduction ? 'None' : 'Lax',
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
