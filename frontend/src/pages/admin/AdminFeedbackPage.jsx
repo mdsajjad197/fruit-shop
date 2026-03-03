@@ -28,7 +28,8 @@ export default function AdminFeedbackPage() {
         // Socket connection to listen for realtime feedback
         const socket = import.meta.env.VITE_SOCKET_URL
             ? io(import.meta.env.VITE_SOCKET_URL, { withCredentials: true })
-            : io('http://localhost:5000', { withCredentials: true });
+            : io('https://fruit-shop-orpin.vercel.app', { withCredentials: true });
+
 
         socket.emit('join-admin');
 
