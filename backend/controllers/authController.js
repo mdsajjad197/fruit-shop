@@ -20,10 +20,11 @@ export const register = asyncHandler(async (req, res) => {
     }
 
     const user = await User.create({ name, email, password });
-    generateToken(res, user._id);
+    const token = generateToken(res, user._id);
 
     res.status(201).json({
         success: true,
+        token,
         user: {
             _id: user._id,
             name: user.name,
@@ -57,10 +58,11 @@ export const login = asyncHandler(async (req, res) => {
         throw new Error('Your account is blocked. Contact support.');
     }
 
-    generateToken(res, user._id);
+    const token = generateToken(res, user._id);
 
     res.json({
         success: true,
+        token,
         user: {
             _id: user._id,
             name: user.name,

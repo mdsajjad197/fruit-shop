@@ -22,27 +22,36 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         fetchMe();
+        // Debug helper
+        window.getAuthToken = () => localStorage.getItem('token');
     }, [fetchMe]);
+
 
     const register = async (name, email, password) => {
         const { data } = await authApi.register({ name, email, password });
+        if (data.token) localStorage.setItem('token', data.token);
         setUser(data.user);
         toast.success(`Welcome, ${data.user.name}! 🎉`);
         return data;
     };
 
+
     const login = async (email, password) => {
         const { data } = await authApi.login({ email, password });
+        if (data.token) localStorage.setItem('token', data.token);
         setUser(data.user);
         toast.success(`Welcome back, ${data.user.name}! 🍊`);
         return data;
     };
 
+
     const logout = async () => {
         await authApi.logout();
+        localStorage.removeItem('token');
         setUser(null);
         toast.success('Logged out successfully.');
     };
+
 
     const updateUser = (updatedUser) => setUser(updatedUser);
 

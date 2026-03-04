@@ -28,8 +28,17 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api/health', (req, res) => {
-    res.json({ status: 'ok', env: process.env.NODE_ENV });
+    res.json({
+        status: 'ok',
+        env: process.env.NODE_ENV,
+        secrets: {
+            cloudinary: !!process.env.CLOUDINARY_CLOUD_NAME,
+            mongo: !!process.env.MONGO_URI,
+            jwt: !!process.env.JWT_SECRET
+        }
+    });
 });
+
 
 
 // ─── Socket.io Setup ──────────────────────────────────────────────
@@ -67,6 +76,8 @@ app.use(
     cors({
         origin: true,
         credentials: true,
+        allowedHeaders: ['Content-Type', 'Authorization'],
+        exposedHeaders: ['set-cookie'],
     })
 );
 
@@ -85,10 +96,7 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/admin/users', userRoutes);
 app.use('/api/feedback', feedbackRoutes);
 
-// Health check (redundant but kept for safety if needed at specific path)
-app.get('/api/health', (req, res) => {
-    res.json({ status: 'ok', env: process.env.NODE_ENV });
-});
+
 
 // ─── Error Handling ───────────────────────────────────────────────
 app.use(notFound);

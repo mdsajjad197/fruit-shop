@@ -6,6 +6,16 @@ const axiosInstance = axios.create({
     headers: { 'Content-Type': 'application/json' },
 });
 
+// Request interceptor: add Authorization header from localStorage if available
+axiosInstance.interceptors.request.use((config) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+});
+
+
 // Response interceptor: handle global errors
 axiosInstance.interceptors.response.use(
     (response) => response,

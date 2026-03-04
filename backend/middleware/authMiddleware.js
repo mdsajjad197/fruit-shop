@@ -4,12 +4,20 @@ import User from '../models/User.js';
 
 // Verify JWT from HTTP-only cookie
 export const protect = asyncHandler(async (req, res, next) => {
-    const token = req.cookies?.token;
+    let token;
+
+    if (req.headers.authorization?.startsWith('Bearer')) {
+        token = req.headers.authorization.split(' ')[1];
+    } else if (req.cookies?.token) {
+        token = req.cookies.token;
+    }
 
     if (!token) {
         res.status(401);
         throw new Error('Not authorized. No token found.');
     }
+
+
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
