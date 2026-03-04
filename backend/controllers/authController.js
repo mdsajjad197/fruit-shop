@@ -92,8 +92,10 @@ export const logout = asyncHandler(async (req, res) => {
 // @access  Private
 export const getMe = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id).select('-password');
-    res.json({ success: true, user });
+    const token = generateToken(res, user._id);
+    res.json({ success: true, user, token });
 });
+
 
 // @desc    Update profile
 // @route   PUT /api/auth/profile

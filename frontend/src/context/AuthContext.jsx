@@ -12,8 +12,10 @@ export const AuthProvider = ({ children }) => {
     const fetchMe = useCallback(async () => {
         try {
             const { data } = await authApi.getMe();
+            if (data.token) localStorage.setItem('token', data.token);
             setUser(data.user);
         } catch {
+
             setUser(null);
         } finally {
             setLoading(false);
